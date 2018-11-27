@@ -38,6 +38,10 @@
 			<div class='container'>
 				<h2>We Need Your Help!</h2>
 				<p>Register and vote below for your favourite tracks. This lets you decide what our opening track will be at each event!</p>
+				<?php
+					include 'components/login.php';
+					include 'components/register.php';
+				?>
 			</div>
 		</section>
 		<section id='bio'>

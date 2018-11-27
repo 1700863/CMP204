@@ -42,5 +42,59 @@ $(document).ready(function(){
             refreshMenuHighlight();
         });
 
+    
+
+    function getDataFromForm($form) {
+        var data = {};
+
+        $form.find('input').each(function(index, element){
+            var $el = $(element);
+            if($el.attr('name'))
+                data[$el.attr('name')] = $el.val();
+        });
+
+        return data;
+
+    }
+        
+
+    $(document)
+        .on('click', '[data-login]', function(event) {
+            event.preventDefault();
+
+            var data = getDataFromForm($(this).closest('form'));
+            console.log(data);
+
+            $.ajax({
+                url: './lib/login.php',
+                type: 'POST',
+                data: data,
+                success: function() {
+                    console.log('SUCCESS');
+                },
+                error: function(){
+                    console.log('ERROR');
+                }
+            });
+        })
+        .on('click', '[data-register]', function(event) {
+            event.preventDefault();
+
+            var data = getDataFromForm($(this).closest('form'));
+            console.log(data);
+
+            $.ajax({
+                url: './lib/register.php',
+                type: 'POST',
+                data: data,
+                success: function() {
+                    console.log('SUCCESS');
+                },
+                error: function(){
+                    console.log('ERROR');
+                }
+            });
+        });
+
 
 });
