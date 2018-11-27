@@ -70,10 +70,10 @@ $(document).ready(function(){
                 type: 'POST',
                 data: data,
                 success: function() {
-                    console.log('SUCCESS');
+                    console.log(arguments);
                 },
                 error: function(){
-                    console.log('ERROR');
+                    console.log(arguments);
                 }
             });
         })
@@ -87,11 +87,14 @@ $(document).ready(function(){
                 url: './lib/register.php',
                 type: 'POST',
                 data: data,
-                success: function() {
-                    console.log('SUCCESS');
+                success: function(reply) {
+                    if (reply.error) {
+                        console.log(reply.error);
+                    }
+                    // console.log(arguments);
                 },
                 error: function(){
-                    console.log('ERROR');
+                    console.log(arguments);
                 }
             });
         });
