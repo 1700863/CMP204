@@ -58,6 +58,13 @@ $(document).ready(function(){
         return data;
 
     }
+
+    function applyValidationMessage($form, vMsg) {
+        
+        $.each(vMsg, function(key, val){
+            $form.find('input[name="'+ key +'"]').before('<p class="validation__message">'+ val +'</p>');
+        });
+    }
         
 
     $(document)
@@ -74,9 +81,7 @@ $(document).ready(function(){
                 data: data,
                 success: function() {
                     if (reply.error) {
-                        $.each(reply.error, function(key, val){
-                            $('<p>'+ val +'</p>').insertBefore('input[name="'+ key +'"]');
-                        });
+                        applyValidationMessage($form, reply.error);
                     }
                 },
                 error: function(){
@@ -99,9 +104,7 @@ $(document).ready(function(){
                 data: data,
                 success: function(reply) {
                     if (reply.error) {
-                        $.each(reply.error, function(key, val){
-                            $('<p>'+ val +'</p>').insertBefore('input[name="'+ key +'"]');
-                        });
+                        applyValidationMessage($form, reply.error);
                     }
                 },
                 error: function(){
