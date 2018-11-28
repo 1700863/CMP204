@@ -1,10 +1,11 @@
 
 $(document).ready(function(){
 
+
     var $site = $('html, body'),
         $sections = $('section[id]');
 
-
+    // SCROLL FUNC START
     // Updates the menu items to make an item active in relation to page scroll
     function refreshMenuHighlight () {
         var userFocus = window.pageYOffset + ($(window).height() / 3)
@@ -42,6 +43,7 @@ $(document).ready(function(){
             refreshMenuHighlight();
         });
 
+    // SCROLL FUNC END
     
 
     function getDataFromForm($form) {
@@ -62,7 +64,8 @@ $(document).ready(function(){
         .on('click', '[data-login]', function(event) {
             event.preventDefault();
 
-            var data = getDataFromForm($(this).closest('form'));
+            var $form = $(this).closest('form'),
+                data = getDataFromForm($form);
             console.log(data);
 
             $.ajax({
@@ -70,7 +73,11 @@ $(document).ready(function(){
                 type: 'POST',
                 data: data,
                 success: function() {
-                    console.log(arguments);
+                    if (reply.error) {
+                        $.each(reply.error, function(key, val){
+                            $('<p>'+ val +'</p>').insertBefore('input[name="'+ key +'"]');
+                        });
+                    }
                 },
                 error: function(){
                     console.log(arguments);
@@ -80,7 +87,10 @@ $(document).ready(function(){
         .on('click', '[data-register]', function(event) {
             event.preventDefault();
 
-            var data = getDataFromForm($(this).closest('form'));
+            var $form = $(this).closest('form'),
+                data = getDataFromForm($form);
+
+            $form.find('validation__message').remove();
             console.log(data);
 
             $.ajax({
@@ -89,9 +99,10 @@ $(document).ready(function(){
                 data: data,
                 success: function(reply) {
                     if (reply.error) {
-                        console.log(reply.error);
+                        $.each(reply.error, function(key, val){
+                            $('<p>'+ val +'</p>').insertBefore('input[name="'+ key +'"]');
+                        });
                     }
-                    // console.log(arguments);
                 },
                 error: function(){
                     console.log(arguments);
