@@ -62,7 +62,7 @@ $(document).ready(function(){
     function applyValidationMessage($form, vMsg) {
         
         $.each(vMsg, function(key, val){
-            $form.find('input[name="'+ key +'"]').before('<p class="validation__message">'+ val +'</p>');
+            $form.find('input[name="'+ key +'"]').before('<div class="validation__message">'+ val +'</div>');
         });
     }
         
@@ -73,6 +73,8 @@ $(document).ready(function(){
 
             var $form = $(this).closest('form'),
                 data = getDataFromForm($form);
+
+                $form.find('.validation__message').remove();
             console.log(data);
 
             $.ajax({
@@ -80,8 +82,8 @@ $(document).ready(function(){
                 type: 'POST',
                 data: data,
                 success: function() {
-                    if (reply.error) {
-                        applyValidationMessage($form, reply.error);
+                    if (reply.validationError) {
+                        applyValidationMessage($form, reply.validationError);
                     }
                     console.log(arguments);
                 },
@@ -96,7 +98,7 @@ $(document).ready(function(){
             var $form = $(this).closest('form'),
                 data = getDataFromForm($form);
 
-            $form.find('validation__message').remove();
+            $form.find('.validation__message').remove();
             console.log(data);
 
             $.ajax({
@@ -104,8 +106,8 @@ $(document).ready(function(){
                 type: 'POST',
                 data: data,
                 success: function(reply) {
-                    if (reply.error) {
-                        applyValidationMessage($form, reply.error);
+                    if (reply.validationError) {
+                        applyValidationMessage($form, reply.validationError);
                     }
                     console.log(arguments);
                 },
