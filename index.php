@@ -44,6 +44,17 @@
 				?>
 			</div>
 		</section>
+		<script type="text/javascript">
+		// console.log('api call');
+		// 	var xhttp = new XMLHttpRequest(),
+		// 		uri = 'https://api.spotify.com/v1/artists/7MqnCTCAX6SsIYYdJCQj9B/top-tracks';
+
+		// 	xhttp.onreadystatechange = function() {
+		// 		console.log(arguments);
+		// 	};
+		// 	xhttp.open("GET", uri, true);
+		// 	xhttp.send();
+		</script>
 		<section id='bio'>
 			<div class='container'>
 				<h2>Biography</h2>
