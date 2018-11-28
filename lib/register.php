@@ -30,6 +30,8 @@ function test_input($data) {
   $data = htmlspecialchars($data);
   return $data;
 }
+
+include './lib/createDB.php';
 header('Content-type: application/json');
 echo json_encode($response_array);
 ?>
