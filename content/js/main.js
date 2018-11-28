@@ -83,6 +83,7 @@ $(document).ready(function(){
                     if (reply.error) {
                         applyValidationMessage($form, reply.error);
                     }
+                    console.log(arguments);
                 },
                 error: function(){
                     console.log(arguments);
@@ -106,6 +107,7 @@ $(document).ready(function(){
                     if (reply.error) {
                         applyValidationMessage($form, reply.error);
                     }
+                    console.log(arguments);
                 },
                 error: function(){
                     console.log(arguments);
@@ -115,3 +117,4 @@ $(document).ready(function(){
 
 
 });
+
