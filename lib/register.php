@@ -3,6 +3,7 @@
 $usernameErr = $emailErr = $passwordErr = "";
 $username = $email = $password = "";
 $response_array = [];
+include './lib/createDB.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["username"])) {
@@ -31,7 +32,25 @@ function test_input($data) {
   return $data;
 }
 
-include './lib/createDB.php';
+// Table doesn't exist, create
+// if (queryDB("")) {
+  
+    // sql to create table
+    $sql = "CREATE TABLE IF NOT EXISTS Customers (
+      id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+      username VARCHAR(30) NOT NULL,
+      password VARCHAR(30) NOT NULL,
+      email VARCHAR(50) NOT NULL,
+      reg_date TIMESTAMP
+      )";
+
+$response_array = queryDB($sql);
+// }
+
+// Update user record
+
+// IF Statement
+
 header('Content-type: application/json');
 echo json_encode($response_array);
 ?>
