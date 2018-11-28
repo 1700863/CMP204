@@ -24,7 +24,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($registrant_email)) {
     $response_array['validationError']['email'] = "Email is required";
   } else {
-    $registrant_email = tidy_input($registrant_email);
+    if (!filter_var($registrant_email, FILTER_VALIDATE_EMAIL)) {
+      $response_array['validationError']['email'] = "Invalid email format"; 
+    } else {
+      $registrant_email = tidy_input($registrant_email);
+    }
   }
 
   if (empty($registrant_password)) {

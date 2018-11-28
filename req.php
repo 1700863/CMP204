@@ -13,20 +13,49 @@
     <p>The following is the list of requirements stated in the project brief and how each one has been achieved</p>
 
     <ul>
-        <li>A clear use of HTML 5</li> --- index.php or any item in the components folder.
-        <li>Use of Bootstrap framework for a responsive layout</li> --- Header is responsive to device size and will change appearance to suit the user.
-        <li>Use of JavaScript to manipulate the DOM based on an Event</li> --- 
-        <li>JavaScript loading of dynamically changing information</li> --- Highest played song on spotify API
-        <li>Use of jQuery in conjunction with the DOM</li> --- Page scrolling function located in main.js scrolls smoothly from poin to point based on event of navbar click. between SCROLL FUNC START and SCROLL FUNC END comments
-        <li>Use of jQuery plugin to enhance your appliction</li> --- 
-        <li>Use of AJAX</li> --- Spotify Request (Page Load)
-        <li>Use of the jQuery AJAX function</li> --- main.js form handling of login and register to return error and validate
-        <li>Use of Cookies</li> --- 
-        <li>User Login functionality (PHP/SQL)</li> --- 
-        <li>Admin Section of the site (PHP/SQL)</li> --- 
-        <li>Ability to ADD/EDIT/DELETE information from a database</li> --- 
-        <li>Appropriate consideration of relevant laws</li> --- 
-        <li>Security Measures (Prepared Statements/Passwords salted and hashed/valiation of user input/any other security features)</li> --- 
+        <li>A clear use of HTML 5</li>
+        <p>index.php or any item in the components folder contains a use of HTML5.</p>
+
+        <li>Use of Bootstrap framework for a responsive layout</li>
+        <p>Header is responsive to device size and will change appearance to suit the user. this is using Bootstrap in navbar.php</p>
+
+        <li>Use of JavaScript to manipulate the DOM based on an Event</li>
+        <p>---</p>
+
+        <li>JavaScript loading of dynamically changing information</li>
+        <p>--- Highest played song on spotify API</p>
+
+        <li>Use of jQuery in conjunction with the DOM</li>
+        <p>Page scrolling function located in main.js scrolls smoothly from point to point based on event of navbar click. between SCROLL FUNC START and SCROLL FUNC END comments</p>
+        
+        <li>Use of jQuery plugin to enhance your appliction</li>
+        <p>---</p>
+        
+        <li>Use of AJAX</li>
+        <p> --- Spotify Request (Page Load)</p>
+        
+        <li>Use of the jQuery AJAX function</li>
+        <p>main.js form handling of login and register to return error and validate</p>
+        
+        <li>Use of Cookies</li>
+        <p>---</p>
+        
+        <li>User Login functionality (PHP/SQL)</li>
+        <p>---</p>
+        
+        <li>Admin Section of the site (PHP/SQL)</li>
+        <p>---</p>
+        
+        <li>Ability to ADD/EDIT/DELETE information from a database</li>
+        <p>---</p>
+        
+        <li>Appropriate consideration of relevant laws</li>
+        <p>---</p>
+        
+        <li>Security Measures (Prepared Statements/Passwords salted and hashed/valiation of user input/any other security features)</li>
+        <p>- SQL Prepared statement are included in ____</p>
+        <p>- hashing using sha2</p>
+        <p>- User input in both registration form and login for are validated in their appropriate lib php files</p>
     </ul>
     
     Cookie something vote requires login, andy knows
