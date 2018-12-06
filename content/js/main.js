@@ -86,13 +86,14 @@ $(document).ready(function(){
         });
     });
 
-
     $(document).on('click', '[data-user-auth]', function(event) {
         event.preventDefault();
 
 
         var $form = $(this).closest('form'),
             data = getDataFromForm($form);
+
+        data.cookieAllowed = getCookie('EU_COOKIE_LAW_CONSENT') == 'true'? true: false;
 
         $form.find('.validation-messages').text('');
         $form.find('.help-block').text('');
@@ -107,14 +108,15 @@ $(document).ready(function(){
                 } else {
                     location.reload();
                 }
+                console.log(arguments);
             },
             error: function(response){
                 var errors = JSON.parse(response.responseText).validationError;
                 applyValidationMessage($form, errors);
+                console.log(arguments);
             }
         });
     });
-
 
     function getCookie(cname) {
         var name = cname + "=";
@@ -131,7 +133,6 @@ $(document).ready(function(){
         }
         return "";
     }
-
     
     $(document).on('click', '[data-track-select]', function(event) {
         event.preventDefault();
@@ -143,7 +144,12 @@ $(document).ready(function(){
 
         data["track"] = $('input:checked').val();
 
-        data["username"] = getCookie('user');
+        if(getCookie('EU_COOKIE_LAW_CONSENT')=='true') {
+            data["username"] = getCookie('user');
+        } else {
+            data["username"] = 'COOKIE_DENIED';
+        }
+        
 
         $.ajax({
             url: './lib/vote.php',

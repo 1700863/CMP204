@@ -15,6 +15,7 @@ function setServerResponse($array, $code) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $authType = $_POST["submit"];
+    $cookieAllowed = $_POST["cookieAllowed"] == "true"? true:false;
 
     if ($authType == "Login") {
         $serverResponse["authType"] = $authType;
@@ -63,12 +64,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 $_SESSION["loggedin"] = true;
                                 $_SESSION["username"] = $username;
 
-                                // Create cookie of username
-                                setcookie(
-                                    'user',
-                                    $username,
-                                    time() + (86400 * 30),
-                                    "/");
+                                if($cookieAllowed) {
+                                    // Create cookie of username
+                                    setcookie(
+                                        'user',
+                                        $username,
+                                        time() + (86400 * 30),
+                                        "/");
+                                }
                                 
                                 // Redirect user to welcome page
                                 $serverResponse['message'] = "Welcome back, $username";
@@ -194,11 +197,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION["username"] = $username;
 
                     // Create cookie of username
-                    setcookie(
-                        'user',
-                        $username,
-                        time() + (86400 * 30),
-                        "/");
+                    if($cookieAllowed) {
+                        // Create cookie of username
+                        setcookie(
+                            'user',
+                            $username,
+                            time() + (86400 * 30),
+                            "/");
+                    }
                     $stmt->fetch();
                     $serverResponse['message'] = "Welcome to the party, $username";
                     setServerResponse($serverResponse, 202);

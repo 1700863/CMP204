@@ -16,7 +16,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 	include 'components/head.php';
 ?>
 
-<body>
+<body class="eupopup eupopup-bottom">
 	<header class='header'>
 		<?php
 			include_once 'components/navbar.php'; 
