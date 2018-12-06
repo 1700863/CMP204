@@ -76,7 +76,9 @@
         <tr>
             <td>Appropriate consideration of relevant laws</td>
             <td>N/A</td>
-            <td>All Images have been provided for free on the web and sources have been included in this file, User data is protected with hashing and salting function. The user is also alerted to the use of cookies in the site.</td>
+            <td>All Images have been provided for free on the web and sources have been included in this file, 
+                User data is protected with hashing and salting function. The user is also alerted to the use of cookies in the site.
+                If the user declines the use of cookies then the website will still function, but when their vote is cast to the Database, the username will appear as "COOKIES_DENIED"</td>
         </tr>
         <tr>
             <td>Security Measures (Prepared Statements/Passwords salted and hashed/valiation of user input/any other security features)</td>
