@@ -70,13 +70,13 @@
         </tr>
         <tr>
             <td>Ability to ADD/EDIT/DELETE information from a database</td>
-            <td></td>
-            <td></td>
+            <td>./lib/userAuth.php</td>
+            <td>Within this file there is the ability to ADD an account with password to the Database.</td>
         </tr>
         <tr>
             <td>Appropriate consideration of relevant laws</td>
-            <td></td>
-            <td></td>
+            <td>N/A</td>
+            <td>All Images have been provided for free on the web and sources have been included in this file, User data is protected with hashing and salting function. The user is also alerted to the use of cookies in the site.</td>
         </tr>
         <tr>
             <td>Security Measures (Prepared Statements/Passwords salted and hashed/valiation of user input/any other security features)</td>
