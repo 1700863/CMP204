@@ -12,25 +12,79 @@
     
     <p>The following is the list of requirements stated in the project brief and how each one has been achieved</p>
 
-    <ul>
-        <li>A clear use of HTML 5</li> --- index.php or any item in the components folder.
-        <li>Use of Bootstrap framework for a responsive layout</li> --- Header is responsive to device size and will change appearance to suit the user.
-        <li>Use of JavaScript to manipulate the DOM based on an Event</li> --- 
-        <li>JavaScript loading of dynamically changing information</li> --- Highest played song on spotify API
-        <li>Use of jQuery in conjunction with the DOM</li> --- Page scrolling function located in main.js scrolls smoothly from poin to point based on event of navbar click. between SCROLL FUNC START and SCROLL FUNC END comments
-        <li>Use of jQuery plugin to enhance your appliction</li> --- 
-        <li>Use of AJAX</li> --- Spotify Request (Page Load)
-        <li>Use of the jQuery AJAX function</li> --- main.js form handling of login and register to return error and validate
-        <li>Use of Cookies</li> --- 
-        <li>User Login functionality (PHP/SQL)</li> --- 
-        <li>Admin Section of the site (PHP/SQL)</li> --- 
-        <li>Ability to ADD/EDIT/DELETE information from a database</li> --- 
-        <li>Appropriate consideration of relevant laws</li> --- 
-        <li>Security Measures (Prepared Statements/Passwords salted and hashed/valiation of user input/any other security features)</li> --- 
-    </ul>
+    <table>
+        <tr>
+            <td>A clear use of HTML 5</td>
+            <td>./index.php, ./components/*.php</td>
+            <td>All these files use semantic tags to varying degrees</td>
+        </tr>
+        <tr>
+            <td>Use of Bootstrap framework for a responsive layout</td>
+            <td>./index.php, ./components/*.php</td>
+            <td>The Bootstrap classes used in all of these files work together to create a responsive layout.</td>
+        </tr>
+        <tr>
+            <td>Use of JavaScript to manipulate the DOM based on an Event</td>
+            <td>./content/js/vote.js</td>
+            <td>The script tags in this file make a call to the server to retrieve Spotify track IDs to be </td>
+        </tr>
+        <tr>
+            <td>JavaScript loading of dynamically changing information</td>
+            <td>./content/js/main.js</td>
+            <td>The code between lines XXX and XXX query the DB to show a leaderboard of which song has recieved the most votes.</td>
+        </tr>
+        <tr>
+            <td>Use of jQuery in conjunction with the DOM</td>
+            <td>./content/js/main.js</td>
+            <td>The JS between lines 8 and 46 will scroll the page to a section when a user clicks on the nav item and change the highlighted nav item based on the page scroll.</td>
+        </tr>
+        <tr>
+            <td>Use of jQuery plugin to enhance your appliction</td>
+            <td>./content/js/main.js</td>
+            <td>Line 48, Slick carousel has been used to display band imagery</td>
+        </tr>
+        <tr>
+            <td>Use of AJAX</td>
+            <td>./components/vote.php</td>
+            <td>The script uses plain JS AJAX to retrieve track info from the server.</td>
+        </tr>
+        <tr>
+            <td>Use of the jQuery AJAX function</td>
+            <td>./content/js/main.js</td>
+            <td>All throught this file are examples of communication between the client and server sides,</td>
+        </tr>
+        <tr>
+            <td>Use of Cookies</td>
+            <td>./content/js/main.js and ./lib/userAuth.php</td>
+            <td>Cookies are used to pass the user's name between the server and JS</td>
+        </tr>
+        <tr>
+            <td>User Login functionality (PHP/SQL)</td>
+            <td>./lib/userAuth.php</td>
+            <td>This file controls the registration and autentication of users</td>
+        </tr>
+        <tr>
+            <td>Admin Section of the site (PHP/SQL)</td>
+            <td>./admin/index.php</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Ability to ADD/EDIT/DELETE information from a database</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Appropriate consideration of relevant laws</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Security Measures (Prepared Statements/Passwords salted and hashed/valiation of user input/any other security features)</td>
+            <td>./lib/userAuth.php</td>
+            <td>Use of salting and hashing is included in the registration process in this page.</td>
+        </tr>
+    </table>
     
-    Cookie something vote requires login, andy knows
-
     IMAGE SOURCES
     Logo: https://img00.deviantart.net/97e7/i/2010/301/0/0/pendulum_logo_by_ipodzanyman-d30bi0q.png
     Carosel:    1-http://desktop-backgrounds-org.s3.amazonaws.com/pendulum-celebrities.jpg

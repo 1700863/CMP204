@@ -1,5 +1,17 @@
+<?php 
+include_once './config.php';
+// Initialize the session
+session_start();
+
+$bool_authenticated = false;
+// Check if the user is already logged in, if yes then redirect him to welcome page
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+    $bool_authenticated = true;
+}
+?>
+
 <!DOCTYPE html>
-<html>
+<html class="<?php echo $bool_authenticated ? " authenticated":"" ?>">
 <?php 
 	include 'components/head.php';
 ?>
@@ -37,24 +49,56 @@
 		<section id='vote'>
 			<div class='container'>
 				<h2>We Need Your Help!</h2>
-				<p>Register and vote below for your favourite tracks. This lets you decide what our opening track will be at each event!</p>
+				<p>We've made a lot of good songs together over the years and when it comes to chosing which is our favourite we just can't choose!</p>
+				<p>Take your pick of the the top 5 songs on currently on Spotify that you want us to open with.</p>
+				
 				<?php
-					include 'components/login.php';
-					include 'components/register.php';
+
+					$sql = "SELECT track,COUNT(*) as votes FROM trackvote GROUP BY track ORDER BY votes DESC";
+							// SELECT track,COUNT(*) as votes FROM trackvote GROUP BY track ORDER BY votes DESC
+											
+					if($stmt = $pdo->prepare($sql)){
+						if($stmt->execute()){
+							if($stmt->rowCount() >= 1){
+								$results = $stmt->fetch(PDO::FETCH_ASSOC);
+								// print_r($results);
+								echo '<p>So far you&apos;ve all made the most noise for:</p>';
+								echo '<iframe src="https://open.spotify.com/embed/track/'. $results['track'] .'" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>';
+
+								// foreach ($results as $result) {
+								// 	echo '<tr>';
+								// 	echo '<td>'. $result['id'] .'</td>';
+								// 	echo '<td>'. $result['username'] .'</td>';
+								// 	echo '<td>'. $result['email'] .'</td>';
+								// 	echo '<td>'. $result['created_at'] .'</td>';
+								// 	echo '</tr>';
+								// }
+
+							}
+
+
+						}
+					}
+
+					// Close statement
+					unset($stmt);
+					if($bool_authenticated){
+						if (!isset($_SESSION["voted"])) {
+							echo '<p>Make yourself heard, tell us what you want!</p>';
+							include 'components/vote.php';
+						}
+					} else {
+						echo '<p>Make yourself heard, tell us what you want!</p>';
+						echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#authModal">
+							Register
+						</button>';
+						// include 'components/login.php';
+						// include 'components/register.php';
+					}
 				?>
+				<!-- <form > -->
 			</div>
 		</section>
-		<script type="text/javascript">
-		// console.log('api call');
-		// 	var xhttp = new XMLHttpRequest(),
-		// 		uri = 'https://api.spotify.com/v1/artists/7MqnCTCAX6SsIYYdJCQj9B/top-tracks';
-
-		// 	xhttp.onreadystatechange = function() {
-		// 		console.log(arguments);
-		// 	};
-		// 	xhttp.open("GET", uri, true);
-		// 	xhttp.send();
-		</script>
 		<section id='bio'>
 			<div class='container'>
 				<h2>Biography</h2>
@@ -72,6 +116,36 @@
 				</p>
 			</div>
 		</footer>
+
+		
+		<div class="modal fade" id="authModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="container">
+							<div class="row">
+								<div class="col-sm-12 col-md-6">
+									<?php include 'components/login.php'; ?>
+								</div>
+								<div class="col-sm-12 col-md-6">
+									<?php include 'components/register.php'; ?>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- <div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save changes</button>
+					</div> -->
+				</div>
+			</div>
+		</div>
 	</main>
 
 </body>

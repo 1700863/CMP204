@@ -31,5 +31,20 @@
         </li>
       </ul>
     </div>
+
+    <?php 
+    // Initialize the session
+      // session_start();
+
+      if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+        echo '<span>Hi, ' . $_SESSION["username"] . '</span><button type="button" class="btn btn-primary" data-user-logout>
+            Logout
+          </button>';
+      } else {
+        echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#authModal">
+            Login/Register
+          </button>';
+      }
+    ?>
   </nav>
 </div>

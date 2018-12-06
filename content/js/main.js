@@ -44,6 +44,12 @@ $(document).ready(function(){
         });
 
     // SCROLL FUNC END
+
+    $('#carousel').slick({
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+    });
     
 
     function getDataFromForm($form) {
@@ -60,62 +66,94 @@ $(document).ready(function(){
     }
 
     function applyValidationMessage($form, vMsg) {
-        
+        $form.find('.validation-messages').text('Please fix the highlighted issues');
         $.each(vMsg, function(key, val){
-            $form.find('input[name="'+ key +'"]').before('<div class="validation__message">'+ val +'</div>');
+            $form.find('input[name="'+ key +'"]').siblings('.help-block').text(val);
         });
     }
-        
 
-    $(document)
-        .on('click', '[data-login]', function(event) {
-            event.preventDefault();
+    $(document).on('click', '[data-user-logout]', function(event) {
+    
+        event.preventDefault();
 
-            var $form = $(this).closest('form'),
-                data = getDataFromForm($form);
-
-                $form.find('.validation__message').remove();
-            console.log(data);
-
-            $.ajax({
-                url: './lib/login.php',
-                type: 'POST',
-                data: data,
-                success: function() {
-                    if (reply.validationError) {
-                        applyValidationMessage($form, reply.validationError);
-                    }
-                    console.log(arguments);
-                },
-                error: function(){
-                    console.log(arguments);
-                }
-            });
-        })
-        .on('click', '[data-register]', function(event) {
-            event.preventDefault();
-
-            var $form = $(this).closest('form'),
-                data = getDataFromForm($form);
-
-            $form.find('.validation__message').remove();
-            console.log(data);
-
-            $.ajax({
-                url: './lib/register.php',
-                type: 'POST',
-                data: data,
-                success: function(reply) {
-                    if (reply.validationError) {
-                        applyValidationMessage($form, reply.validationError);
-                    }
-                    console.log(arguments);
-                },
-                error: function(){
-                    console.log(arguments);
-                }
-            });
+        $.ajax({
+            url: './lib/logout.php',
+            type: 'POST',
+            data: {},
+            success: function(reply) {
+                location.reload();
+            }
         });
+    });
+
+
+    $(document).on('click', '[data-user-auth]', function(event) {
+        event.preventDefault();
+
+
+        var $form = $(this).closest('form'),
+            data = getDataFromForm($form);
+
+        $form.find('.validation-messages').text('');
+        $form.find('.help-block').text('');
+
+        $.ajax({
+            url: './lib/userAuth.php',
+            type: 'POST',
+            data: data,
+            success: function(reply) {
+                if (reply.validationError) {
+                    applyValidationMessage($form, reply.validationError);
+                } else {
+                    location.reload();
+                }
+            },
+            error: function(response){
+                var errors = JSON.parse(response.responseText).validationError;
+                applyValidationMessage($form, errors);
+            }
+        });
+    });
+
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+    }
+
+    
+    $(document).on('click', '[data-track-select]', function(event) {
+        event.preventDefault();
+        var $form = $(this).closest('form'),
+            data = {submit: "vote"};
+
+        $form.find('.validation-messages').text('');
+        $form.find('.help-block').text('');
+
+        data["track"] = $('input:checked').val();
+
+        data["username"] = getCookie('user');
+
+        $.ajax({
+            url: './lib/vote.php',
+            type: 'POST',
+            data: data,
+            success: function(reply) {
+                location.reload();
+            }
+        });
+    });
 
 
 });

@@ -48,26 +48,39 @@ function tidy_input($data) {
   return $data;
 }
 
+// print_r($response_array);
+
 if (!$response_array["validationError"]) {
 
   $createDB = "CREATE TABLE IF NOT EXISTS Customers (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
     user VARCHAR(30) NOT NULL,
-    pass VARCHAR(30) NOT NULL,
+    pass VARCHAR(60) NOT NULL,
     email VARCHAR(50) NOT NULL,
     reg_date TIMESTAMP
     )";
 
-  dbExec($createDB);
+  queryDB($createDB);
 
-  $createUser = "INSERT INTO Customers (user, pass, email) VALUES ('$registrant_username' , '$registrant_password' , '$registrant_email')";
+  
 
-  dbExec($createUser);
+  // Check if user already exists with username
+  if(queryDB("SELECT user FROM Customers WHERE user='".$registrant_username ."'")) {
+    $response_array['validationError']['username'] = "Username taken";
+  } else {
 
-  $response_array['newUser'] = array(
-    "user" => $registrant_username,
-    "email" => $registrant_email
-  );
+    $hashed = password_hash($registrant_password, PASSWORD_BCRYPT, ['cost' => 12]);
+
+    $createUser = "INSERT INTO Customers (user, pass, email) VALUES ('$registrant_username' , '$hashed' , '$registrant_email')";
+
+
+    queryDB($createUser);
+
+    $response_array['newUser'] = array(
+      "user" => $registrant_username,
+      "email" => $registrant_email
+    );
+  }
 }
 
 header('Content-type: application/json');
