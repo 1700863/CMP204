@@ -100,6 +100,10 @@ p {
     background-repeat: no-repeat;
 }
 
+.modal-content{
+    background-color: #112;
+}
+
 #tracks {
     padding-left: 40px;
 }
